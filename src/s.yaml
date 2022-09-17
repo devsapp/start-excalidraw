@@ -1,0 +1,42 @@
+edition: 1.0.0
+name: web-framework-app
+access: "{{ access }}"
+
+vars:
+  region: "{{ region }}"
+  service:
+    name: "{{ serviceName }}"
+    description: 'Serverless Devs Web Framework Service'
+
+services:
+  framework:
+    component: fc
+    actions:
+      pre-deploy:
+        - plugin: website-fc
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: "{{ functionName }}"
+        description: 'Serverless Devs Web Framework Function'
+        codeUri: './build'
+        runtime: custom
+        timeout: 60
+        caPort: 9000
+        customRuntimeConfig:
+          command:
+            - node
+            - index.js
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: '/*'
