@@ -2,7 +2,7 @@ Type: Application
 Name: start-excalidraw
 Provider:
   - 阿里云
-Version: 0.0.2
+Version: 0.0.3
 Description: 轻量的在线白板工具，轻松绘制具有手绘风格的图形
 HomePage: https://github.com/devsapp/start-excalidraw
 Tags:
